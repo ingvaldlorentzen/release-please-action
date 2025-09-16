@@ -22,7 +22,7 @@ import {RestoreFn} from 'mocked-env';
 import mockedEnv from 'mocked-env';
 const fetch = require('node-fetch');
 
-import {Manifest, GitHub} from 'release-please';
+import {Manifest, GitHub} from '@intility/release-please-uv-workspace';
 // As defined in action.yml
 
 const DEFAULT_INPUTS: Record<string, string> = {
