@@ -115,7 +115,16 @@ function loadOrBuildManifest(
     inputs.configFile,
     inputs.manifestFile,
     manifestOverrides
-  );
+  ).then(manifest => {
+    // Override changelogHost for all paths if provided as action input and different from default
+    if (inputs.changelogHost && inputs.changelogHost !== DEFAULT_GITHUB_SERVER_URL) {
+      core.debug(`Overriding changelogHost to: ${inputs.changelogHost}`);
+      for (const path in manifest.repositoryConfig) {
+        manifest.repositoryConfig[path].changelogHost = inputs.changelogHost;
+      }
+    }
+    return manifest;
+  });
 }
 
 export async function main(fetchOverride?: any) {
